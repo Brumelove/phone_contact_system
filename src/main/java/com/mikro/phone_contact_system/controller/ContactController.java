@@ -3,11 +3,11 @@ package com.mikro.phone_contact_system.controller;
 import com.mikro.phone_contact_system.dto.ContactDto;
 import com.mikro.phone_contact_system.exception.BadRequestException;
 import com.mikro.phone_contact_system.service.ContactService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**

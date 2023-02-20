@@ -1,9 +1,11 @@
 FROM openjdk:17-jdk-slim-buster
-WORKDIR /app
 
-COPY app/build/lib/* build/lib/
+VOLUME /tmp
 
-COPY app/build/libs/app.jar build/
+EXPOSE 8180
 
-WORKDIR /app/build
-ENTRYPOINT java -jar app.jar
+ARG JAR_FILE=target/*.jar
+
+ADD ${JAR_FILE} app.jar
+
+ENTRYPOINT ["java","-jar","/app.jar"]

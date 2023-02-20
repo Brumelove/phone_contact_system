@@ -60,11 +60,12 @@ class ContactServiceTest {
 
         when(mapper.mapDtoToModel(contactDto)).thenReturn(contact);
         when(mapper.mapModelToDto(contact)).thenReturn(contactDto);
+        when(mapper.partialUpdate(contactDto, contact)).thenReturn(contact);
         when(repository.findById(1L)).thenReturn(Optional.of(contact));
         when(repository.save(contact)).thenReturn(contact);
 
-
         var response = service.updateContact(1L, contactDto);
+
         assertNotNull(response);
         assertEquals(1L, response.getId());
 
@@ -111,17 +112,6 @@ class ContactServiceTest {
 
         verify(repository, times(1)).deleteById(1L);
     }
-
-//    @Test
-//    void deleteWithException() {
-//        when(repository.existsById(1L)).thenReturn(false);
-//
-//        var response = service.delete(1L);
-//        assertNotNull(response);
-//
-//        verify(repository, times(1)).deleteById(1L);
-//    }
-
     private ContactDto getContactDto() {
         var contactDto = new ContactDto();
         contactDto.setAddress(address);

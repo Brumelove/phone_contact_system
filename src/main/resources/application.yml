@@ -34,8 +34,6 @@ app:
   description: Recruitment task for trygrupp
 
 
-
-
 logging:
   level:
     org:

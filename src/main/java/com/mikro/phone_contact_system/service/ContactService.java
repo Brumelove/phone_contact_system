@@ -1,5 +1,6 @@
 package com.mikro.phone_contact_system.service;
 
+import com.mikro.phone_contact_system.PhoneContactSystemApplication;
 import com.mikro.phone_contact_system.dto.ContactDto;
 import com.mikro.phone_contact_system.exception.ElementNotFoundException;
 import com.mikro.phone_contact_system.mapper.ContactMapper;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.events.Characters;
 import java.util.List;
 
 /**
@@ -30,8 +32,8 @@ public class ContactService {
     }
 
     public ContactDto updateContact(Long id, ContactDto contactDto) {
-        findById(id);
-        return createContact(contactDto);
+        var contact = mapper.partialUpdate(contactDto,  mapper.mapDtoToModel(findById(id)));
+      return mapper.mapModelToDto(repository.save(contact));
     }
 
     /** method to get a contact
